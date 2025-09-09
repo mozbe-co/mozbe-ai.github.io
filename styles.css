@@ -114,6 +114,11 @@ a:hover{opacity:.9}
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+.marquee__label {
+  font-size: 1.2rem;    /* slightly larger */
+  font-weight: 600;     /* semi-bold */
+  letter-spacing: 0.3px;
+}
 
 
 /* Cards & panels */
