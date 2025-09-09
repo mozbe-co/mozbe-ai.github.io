@@ -40,7 +40,7 @@ a:hover{opacity:.9}
 .nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.8);backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid var(--line)}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;min-height:64px}
 .brand img {
-  height: 48px;   /* or 56px if you want larger */
+  height: 15px;   /* or 56px if you want larger */
   width: auto;    /* keeps aspect ratio */
 }
 .accent{color:var(--accent)}
