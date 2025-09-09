@@ -96,7 +96,7 @@
 
   // Conversation script
   const CONVO = [
-    { role: 'ai',   text: 'Hi, I handle intake for your firm. Were you injured in an accident?' },
+    { role: 'ai',   text: 'Hi, I handle intake for [firm name]. Were you injured in an accident?' },
     { role: 'user', text: 'Yes, rear-ended yesterday.' },
     { role: 'ai',   text: 'Understood. Did you receive medical treatment?' },
     { role: 'user', text: 'Yes, ER visit. Neck pain.' },
