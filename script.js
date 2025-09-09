@@ -75,10 +75,10 @@
         if (status) status.textContent = 'Thanks! We will get back to you shortly.';
         form.reset();
       } else {
-        if (status) status.textContent = 'Something went wrong. Please email hello@mozbe.ai';
+        if (status) status.textContent = 'Something went wrong. Please email benjamin.j.shin@vanderbilt.edu';
       }
     } catch (err) {
-      if (status) status.textContent = 'Network error. Please email hello@mozbe.ai';
+      if (status) status.textContent = 'Network error. Please email benjamin.j.shin@vanderbilt.edu';
     }
   });
 })();
