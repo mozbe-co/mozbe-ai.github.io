@@ -43,18 +43,47 @@
 
   <main id="main">
     <!-- HERO -->
-   <div class="hero__card" aria-label="Example intake chat and booking">
-  <div class="phone phone--light">
-    <div class="status">New text from: <b>Potential Client</b></div>
+<!-- HERO -->
+<section id="top" class="hero">
+  <div class="container grid-2">
+    <div class="hero__copy">
+      <h1>
+        Capture more Personal Injury clients—<span class="accent">with a professional, always-on intake</span>
+      </h1>
+      <p class="lead">
+        Mozbe AI answers calls & texts <strong>24/7</strong>, asks your intake questions, <strong>books consults</strong>, and sends a clean summary—so no lead is missed.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="#book">Start your 14-day pilot</a>
+        <a class="btn btn--ghost" href="#how">See how it works</a>
+      </div>
+      <ul class="trust">
+        <li>Professional, clean workflows • No legal advice</li>
+        <li>Works with Google/Outlook/Calendly</li>
+        <li>Optional BAAs</li>
+      </ul>
+    </div>
 
-    <!-- Live region for the animated chat -->
-    <div class="chat" aria-live="polite" aria-atomic="false"></div>
+    <div class="hero__card" aria-label="Example intake chat and booking">
+      <div class="phone phone--light">
+        <div class="status">New text from: <b>Potential Client</b></div>
 
-    <button class="chat__replay btn btn--small btn--ghost" type="button" aria-label="Replay conversation">
-      Replay
-    </button>
+        <!-- Chat container (for animation) -->
+        <div class="chat" aria-live="polite" aria-atomic="false">
+          <div class="bubble bubble--ai">Hi, I handle intake for your firm. Were you injured in an accident?</div>
+          <div class="bubble bubble--user">Yes, rear-ended yesterday.</div>
+          <div class="bubble bubble--ai">Understood. Did you receive medical treatment?</div>
+          <div class="bubble bubble--user">Yes, ER visit. Neck pain.</div>
+          <div class="bubble bubble--ai">I can book a free consult—tomorrow 2:30pm works. Confirm?</div>
+          <div class="bubble bubble--user">Yes.</div>
+          <div class="confirm">Consultation booked ✔︎</div>
+        </div>
+        <!-- /chat -->
+      </div>
+    </div>
   </div>
-</div>
+</section>
+
 
     <!-- FOUNDERS MARQUEE -->
 <section class="marquee">
