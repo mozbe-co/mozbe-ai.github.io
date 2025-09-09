@@ -39,9 +39,9 @@ a:hover{opacity:.9}
 
 .nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.8);backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid var(--line)}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;min-height:64px}
-.brand img {
-  height: 15px;   /* or 56px if you want larger */
-  width: auto;    /* keeps aspect ratio */
+.brand__logo {
+  height: 40px;   /* or 48px, depending on how big you want it */
+  width: auto;    /* keeps proportions */
 }
 .accent{color:var(--accent)}
 .menu{display:flex;gap:20px;align-items:center}
