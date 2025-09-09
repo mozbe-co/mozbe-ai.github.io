@@ -275,6 +275,49 @@ input:focus,textarea:focus{ border-color:#c3c6cf; box-shadow:0 0 0 4px rgba(11,9
   margin: 0.5rem auto 0;
   display: inline-block;
 }
+/* --- Improved chat bubble styles --- */
+
+/* Mozbe AI messages */
+.bubble--ai {
+  align-self: flex-start;
+  background: #f1f1f3;       /* softer gray */
+  border: 1px solid #e2e3e8;
+  color: #111;               /* dark ink for readability */
+  position: relative;
+  max-width: 80%;
+}
+
+/* Optional Mozbe label above AI messages */
+.bubble--ai::before {
+  content: "Mozbe AI";
+  display: block;
+  font-size: 0.72rem;
+  color: #5b5e66;
+  margin-bottom: 2px;
+}
+
+/* Client messages */
+.bubble--user {
+  align-self: flex-end;
+  margin-left: auto;
+  background: #007aff;       /* iMessage blue */
+  border: 1px solid #0070f3;
+  color: #fff;               /* white text on blue */
+  max-width: 80%;
+}
+
+/* Confirmation */
+.confirm {
+  align-self: center;
+  background: #eaf7ee;
+  border: 1px solid #cdeed7;
+  color: #18794e;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 14px;
+}
+
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
