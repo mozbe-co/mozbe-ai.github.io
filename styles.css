@@ -144,7 +144,7 @@ p{ margin:.45rem 0 1rem; }
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
-.marquee__track{ display:flex; gap:60px; width:max-content; animation:scroll 18s linear infinite; }
+.marquee__track{ display:flex; gap:60px; width:max-content; animation:scroll 30s linear infinite; }
 .marquee__track img{
   height:40px; width:auto; object-fit:contain;
   filter:grayscale(18%) contrast(115%); opacity:.9;
