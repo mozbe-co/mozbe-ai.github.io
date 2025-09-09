@@ -1,57 +1,100 @@
-const toggle = document.querySelector('.nav__toggle');
-const menu = document.getElementById('menu');
-if (toggle && menu){
+/* =========================================================
+   Mozbe AI — Site Scripts
+   - Nav toggle (mobile)
+   - Metrics count-up on view
+   - Contact form (Formspree)
+   - Hero chat animation (safe + fallback)
+   - Footer year
+   ========================================================= */
+
+/* ---------- Nav toggle ---------- */
+(() => {
+  const toggle = document.querySelector('.nav__toggle');
+  const menu = document.getElementById('menu');
+  if (!toggle || !menu) return;
+
   toggle.addEventListener('click', () => {
     const open = menu.classList.toggle('open');
     toggle.setAttribute('aria-expanded', String(open));
   });
-}
+})();
 
-// Animated metrics count-up
-const counters = document.querySelectorAll('[data-count]');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting){
-      const el = entry.target;
-      const target = parseFloat(el.dataset.count);
-      let cur = 0;
-      const step = () => {
-        const inc = (target/50) || 1;
-        cur = Math.min(target, cur + inc);
-        el.textContent = (Math.round(cur*10)/10).toString();
-        if (cur < target) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-      io.unobserve(el);
-    }
-  });
-},{threshold:0.5});
-counters.forEach(c => io.observe(c));
+/* ---------- Metrics count-up ---------- */
+(() => {
+  const counters = document.querySelectorAll('[data-count]');
+  if (!counters.length) return;
 
-// Contact form (Formspree friendly)
-const form = document.getElementById('contact');
-const status = document.querySelector('.form__status');
-if (form){
+  const animate = (el) => {
+    const target = parseFloat(el.dataset.count);
+    if (Number.isNaN(target)) return;
+    let cur = 0;
+
+    const step = () => {
+      // 50 frames to finish; minimum increment of ~1/50th target
+      const inc = (target / 50) || 1;
+      cur = Math.min(target, cur + inc);
+      // keep 1 decimal if needed
+      el.textContent = (Math.round(cur * 10) / 10).toString();
+      if (cur < target) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.35 });
+
+  counters.forEach(c => io.observe(c));
+})();
+
+/* ---------- Contact form (Formspree) ---------- */
+(() => {
+  const form = document.getElementById('contact');
+  if (!form) return;
+
+  const status = document.querySelector('.form__status');
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    status.textContent = 'Sending…';
+    if (status) status.textContent = 'Sending…';
+
     try {
       const formData = new FormData(form);
-      const resp = await fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
-      if (resp.ok){
-        status.textContent = 'Thanks! We will get back to you shortly.';
+      const resp = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (resp.ok) {
+        if (status) status.textContent = 'Thanks! We will get back to you shortly.';
         form.reset();
       } else {
-        status.textContent = 'Something went wrong. Please email hello@mozbe.ai';
+        if (status) status.textContent = 'Something went wrong. Please email hello@mozbe.ai';
       }
-    } catch(err){
-      status.textContent = 'Network error. Please email hello@mozbe.ai';
+    } catch (err) {
+      if (status) status.textContent = 'Network error. Please email hello@mozbe.ai';
     }
   });
-}
-(function () {
-  // ===== Conversation script =====
-  // role: 'ai' or 'user', text: string
+})();
+
+/* ---------- Hero chat animation ---------- */
+(() => {
+  const hero = document.querySelector('#top');
+  if (!hero) return;
+
+  const chat = hero.querySelector('.chat');
+  const replayBtn = hero.querySelector('.chat__replay');
+
+  // If there’s no chat container, bail gracefully
+  if (!chat) return;
+
+  // Conversation script
   const CONVO = [
     { role: 'ai',   text: 'Hi, I handle intake for your firm. Were you injured in an accident?' },
     { role: 'user', text: 'Yes, rear-ended yesterday.' },
@@ -65,31 +108,17 @@ if (form){
   // Tunables
   const TYPE_SPEED_MS = 16;          // per character
   const AI_THINK_MS = [700, 1100];   // min/max delay before AI messages
-  const USER_DELAY_MS = 400;         // slight delay for user messages
-  const START_ON_VIEW = true;
-
-  const hero = document.querySelector('#top');
-  const chat = hero?.querySelector('.chat');
-  const replayBtn = hero?.querySelector('.chat__replay');
-
-  if (!hero || !chat) return;
+  const USER_DELAY_MS = 350;         // slight delay for user messages
 
   let running = false;
   let abortController = null;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function sleep(ms) {
-    return new Promise(r => setTimeout(r, ms));
-  }
+  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+  const rand = (min, max) => Math.floor(min + Math.random() * (max - min));
+  const autoScroll = () => { chat.scrollTop = chat.scrollHeight; };
 
-  function rand(min, max) {
-    return Math.floor(min + Math.random() * (max - min));
-  }
-
-  function autoScroll() {
-    chat.scrollTop = chat.scrollHeight;
-  }
-
-  function createBubble(role, text = '') {
+  function makeBubble(role, text = '') {
     if (role === 'confirm') {
       const el = document.createElement('div');
       el.className = 'confirm';
@@ -98,28 +127,25 @@ if (form){
     }
     const el = document.createElement('div');
     el.className = `bubble bubble--${role}`;
-    el.textContent = text;
+    el.textContent = '';
     return el;
   }
 
-  function createTyping() {
-    const wrap = document.createElement('div');
-    wrap.className = 'typing';
+  function typingIndicator() {
+    const w = document.createElement('div');
+    // use bubble styling so it looks consistent
+    w.className = 'typing bubble bubble--ai';
     for (let i = 0; i < 3; i++) {
-      const dot = document.createElement('span');
-      dot.className = 'typing__dot';
-      wrap.appendChild(dot);
+      const d = document.createElement('span');
+      d.className = 'typing__dot';
+      w.appendChild(d);
     }
-    return wrap;
+    return w;
   }
 
   async function typeText(el, text, signal) {
-    // Respect reduced motion: just drop full text
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) {
-      el.textContent = text;
-      autoScroll();
-      return;
+      el.textContent = text; autoScroll(); return;
     }
     for (let i = 0; i < text.length; i++) {
       if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
@@ -132,10 +158,11 @@ if (form){
   async function playConversation() {
     if (running) return;
     running = true;
+
     abortController = new AbortController();
     const { signal } = abortController;
 
-    // Reset
+    // If there’s prefilled fallback content, clear it before animating
     chat.innerHTML = '';
 
     try {
@@ -143,31 +170,29 @@ if (form){
         if (signal.aborted) break;
 
         if (msg.role === 'ai') {
-          const typing = createTyping();
-          chat.appendChild(typing);
-          autoScroll();
+          const typing = typingIndicator();
+          chat.appendChild(typing); autoScroll();
           await sleep(rand(...AI_THINK_MS));
           typing.remove();
 
-          const bubble = createBubble('ai');
-          chat.appendChild(bubble);
-          await typeText(bubble, msg.text, signal);
+          const b = makeBubble('ai');
+          chat.appendChild(b);
+          await typeText(b, msg.text, signal);
 
         } else if (msg.role === 'user') {
           await sleep(USER_DELAY_MS);
-          const bubble = createBubble('user');
-          chat.appendChild(bubble);
-          await typeText(bubble, msg.text, signal);
+          const b = makeBubble('user');
+          chat.appendChild(b);
+          await typeText(b, msg.text, signal);
 
-        } else if (msg.role === 'confirm') {
-          await sleep(300);
-          const conf = createBubble('confirm', msg.text);
-          chat.appendChild(conf);
+        } else {
+          await sleep(250);
+          chat.appendChild(makeBubble('confirm', msg.text));
           autoScroll();
         }
       }
-    } catch (e) {
-      // Silently ignore aborts
+    } catch (_) {
+      // ignore abort
     } finally {
       running = false;
     }
@@ -178,26 +203,41 @@ if (form){
     playConversation();
   }
 
-  // Start when in view (for performance) or immediately
-  if (START_ON_VIEW && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          playConversation();
-          io.disconnect();
-        }
-      });
-    }, { threshold: 0.35 });
-    io.observe(hero);
-  } else {
+  // Start when visible OR if already visible. Also add a small backup timer.
+  let started = false;
+
+  function startOnce() {
+    if (started) return;
+    started = true;
     playConversation();
   }
 
-  // Replay button
-  if (replayBtn) {
-    replayBtn.addEventListener('click', replay);
+  // If element is already on screen at load, begin immediately
+  const rect = hero.getBoundingClientRect();
+  const inViewport = rect.top < (window.innerHeight || document.documentElement.clientHeight) && rect.bottom > 0;
+  if (inViewport) startOnce();
+
+  if ('IntersectionObserver' in window && !started) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          startOnce();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.1 }); // forgiving threshold
+    observer.observe(hero);
   }
+
+  // Backup: if still not started after 1.5s (e.g., odd layouts), start anyway
+  setTimeout(startOnce, 1500);
+
+  // Replay
+  if (replayBtn) replayBtn.addEventListener('click', replay);
 })();
 
-// Year in footer
-document.getElementById('year').textContent = new Date().getFullYear().toString();
+/* ---------- Footer year ---------- */
+(() => {
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+})();
