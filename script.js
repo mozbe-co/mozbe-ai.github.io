@@ -1,4 +1,182 @@
-];
+/* =========================================================
+
+   Mozbe AI — Site Scripts
+
+   - Nav toggle (mobile)
+
+   - Metrics count-up on view
+
+   - Contact form (Formspree)
+
+   - Hero chat animation (safe + fallback)
+
+   - Footer year
+
+   ========================================================= */
+
+/* ---------- Nav toggle ---------- */
+
+(() => {
+
+  const toggle = document.querySelector('.nav__toggle');
+
+  const menu = document.getElementById('menu');
+
+  if (!toggle || !menu) return;
+
+  toggle.addEventListener('click', () => {
+
+    const open = menu.classList.toggle('open');
+
+    toggle.setAttribute('aria-expanded', String(open));
+
+  });
+
+})();
+
+/* ---------- Metrics count-up ---------- */
+
+(() => {
+
+  const counters = document.querySelectorAll('[data-count]');
+
+  if (!counters.length) return;
+
+  const animate = (el) => {
+
+    const target = parseFloat(el.dataset.count);
+
+    if (Number.isNaN(target)) return;
+
+    let cur = 0;
+
+    const step = () => {
+
+      // 50 frames to finish; minimum increment of ~1/50th target
+
+      const inc = (target / 50) || 1;
+
+      cur = Math.min(target, cur + inc);
+
+      // keep 1 decimal if needed
+
+      el.textContent = (Math.round(cur * 10) / 10).toString();
+
+      if (cur < target) requestAnimationFrame(step);
+
+    };
+
+    requestAnimationFrame(step);
+
+  };
+
+  const io = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+
+        animate(entry.target);
+
+        io.unobserve(entry.target);
+
+      }
+
+    });
+
+  }, { threshold: 0.35 });
+
+  counters.forEach(c => io.observe(c));
+
+})();
+
+/* ---------- Contact form (Formspree) ---------- */
+
+(() => {
+
+  const form = document.getElementById('contact');
+
+  if (!form) return;
+
+  const status = document.querySelector('.form__status');
+
+  form.addEventListener('submit', async (e) => {
+
+    e.preventDefault();
+
+    if (status) status.textContent = 'Sending…';
+
+    try {
+
+      const formData = new FormData(form);
+
+      const resp = await fetch(form.action, {
+
+        method: 'POST',
+
+        body: formData,
+
+        headers: { 'Accept': 'application/json' }
+
+      });
+
+      if (resp.ok) {
+
+        if (status) status.textContent = 'Thanks! We will get back to you shortly.';
+
+        form.reset();
+
+      } else {
+
+        if (status) status.textContent = 'Something went wrong. Please email benjamin.j.shin@vanderbilt.edu';
+
+      }
+
+    } catch (err) {
+
+      if (status) status.textContent = 'Network error. Please email benjamin.j.shin@vanderbilt.edu';
+
+    }
+
+  });
+
+})();
+
+/* ---------- Hero chat animation ---------- */
+
+(() => {
+
+  const hero = document.querySelector('#top');
+
+  if (!hero) return;
+
+  const chat = hero.querySelector('.chat');
+
+  const replayBtn = hero.querySelector('.chat__replay');
+
+  // If there’s no chat container, bail gracefully
+
+  if (!chat) return;
+
+  // Conversation script
+
+  const CONVO = [
+
+    { role: 'ai',   text: 'Hi, I handle intake for [firm name]. Were you injured in an accident?' },
+
+    { role: 'user', text: 'Yes, rear-ended yesterday.' },
+
+    { role: 'ai',   text: 'Understood. Did you receive medical treatment?' },
+
+    { role: 'user', text: 'Yes, ER visit. Neck pain.' },
+
+    { role: 'ai',   text: 'I can book a free consult—tomorrow 2:30pm works. Confirm?' },
+
+    { role: 'user', text: 'Yes.' },
+
+    { role: 'confirm', text: 'Consultation booked ✔︎' }
+
+  ];
 
   // Tunables
 
