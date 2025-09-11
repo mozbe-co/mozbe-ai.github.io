@@ -1,14 +1,19 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mozbe AI — LLM Automations for Bookings, Forms & Calls</title>
-  <meta name="description" content="Mozbe AI builds LLM automations that book appointments, complete paperwork, answer calls, and move data into your tools—so your team doesn’t have to." />
+
+  <title>Mozbe AI</title>
+
+  <meta name="description" content="Always-on LLM automations that handle bookings, forms, phone calls, and summaries—so no lead or task is missed." />
 
   <!-- Social -->
-  <meta property="og:title" content="Mozbe AI — LLM Automations for Bookings, Forms & Calls" />
-  <meta property="og:description" content="Bookings, paperwork automation, phone calls, forms. Always-on LLM agents that do the busywork for you." />
+  <meta property="og:title" content="Mozbe AI — Automations for Bookings, Forms & Calls" />
+  <meta property="og:description" content="Answers calls & texts 24/7, collects info, books appointments, and sends clean summaries." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/social-card.png" />
 
@@ -16,17 +21,19 @@
   <link rel="preload" href="styles.css" as="style">
   <link rel="stylesheet" href="styles.css" />
   <link rel="preload" href="script.js" as="script">
+
 </head>
 
 <body>
+
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="nav">
     <div class="container nav__inner">
-      <a class="brand" href="#top" aria-label="Mozbe AI home">
-        <img src="logo.png" alt="Mozbe AI logo" class="brand__logo" />
-        <span class="brand__text">Mozbe<span class="accent">AI</span></span>
-      </a>
+
+     <a class="brand" href="#top" aria-label="Mozbe AI home">
+       <img src="logo.png" alt="Mozbe AI logo" class="brand__logo" />
+     </a>
 
       <button class="nav__toggle" aria-controls="menu" aria-expanded="false">
         <span class="sr-only">Toggle menu</span>
@@ -34,324 +41,346 @@
       </button>
 
       <nav id="menu" class="menu">
-        <a href="#features">Capabilities</a>
+        <a href="#features">Features</a>
         <a href="#how">How it works</a>
         <a href="#results">Results</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
         <a class="btn btn--small btn--primary" href="#book">Book a demo</a>
       </nav>
+
     </div>
   </header>
 
   <main id="main">
-    <!-- HERO -->
-    <section id="top" class="hero">
-      <div class="container grid-2">
-        <div class="hero__copy">
-          <h1>
-            LLM automations that <span class="accent">do the busywork for you</span>
-          </h1>
-          <p class="lead">
-            Bookings, forms, phone calls, and paperwork—handled 24/7. Mozbe AI builds custom agents that schedule appointments, complete documents, answer calls, and sync data to your stack.
-          </p>
-          <div class="cta-row">
-            <a class="btn btn--primary" href="#book">Start your 14-day pilot</a>
-            <a class="btn btn--ghost" href="#how">See how it works</a>
-          </div>
-          <ul class="trust">
-            <li>Works with Google/Outlook/Calendly</li>
-            <li>Zapier, HubSpot, Airtable, Slack</li>
-            <li>Optional BAAs & data retention controls</li>
-          </ul>
-        </div>
 
-        <!-- Demo card: nail salon booking -->
-        <div class="hero__card" aria-label="Example chat and booking">
-          <div class="phone phone--light">
-            <div class="status">New text from: <b>Customer</b></div>
-            <div class="chat" aria-live="polite" aria-atomic="false">
-              <!-- Prefilled fallback; replaced by JS animation -->
-              <div class="bubble bubble--ai">Hi! I’m Mozbe—can I help you book a nail appointment?</div>
-              <div class="bubble bubble--user">Yes, tomorrow after 3pm.</div>
-              <div class="bubble bubble--ai">Great—Gel manicure at 3:30pm or 4:15pm. Preferences?</div>
-              <div class="bubble bubble--user">4:15pm with Kim.</div>
-              <div class="bubble bubble--ai">All set. Please confirm name + phone to finalize.</div>
-              <div class="bubble bubble--user">Alex Chen, (555) 987-1212.</div>
-              <div class="confirm">4:15pm booked ✔︎ Calendar invite sent</div>
-            </div>
-            <button class="btn chat__replay" aria-label="Replay conversation">Replay</button>
-          </div>
-        </div>
+    <!-- HERO -->
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <div class="container grid-2">
+
+    <div class="hero__copy">
+      <h1>
+        Capture more customers—<span class="accent">with a professional, always-on assistant</span>
+      </h1>
+
+      <p class="lead">
+        Mozbe AI answers calls & texts <strong>24/7</strong>, asks your questions, <strong>books appointments</strong>, and sends a clean summary—so no lead is missed.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn--primary" href="#book">Start your 14-day pilot</a>
+        <a class="btn btn--ghost" href="#how">See how it works</a>
       </div>
-    </section>
+
+      <ul class="trust">
+        <li>Professional, clean workflows • No advice or diagnoses</li>
+        <li>Works with Google/Outlook/Calendly</li>
+        <li>Optional BAAs</li>
+      </ul>
+    </div>
+
+    <div class="hero__card" aria-label="Example chat and booking">
+      <div class="phone phone--light">
+        <div class="status">New text from: <b>Customer</b></div>
+
+        <!-- Chat container (for animation) -->
+        <div class="chat" aria-live="polite" aria-atomic="false">
+          <div class="bubble bubble--ai">Hi! I help with bookings for [business name]. Want to schedule a nail appointment?</div>
+          <div class="bubble bubble--user">Yes, tomorrow after 3pm.</div>
+          <div class="bubble bubble--ai">Great—gel manicure at 3:30pm or 4:15pm. Which works?</div>
+          <div class="bubble bubble--user">4:15pm with Kim.</div>
+          <div class="bubble bubble--ai">Got it. Please confirm your name and phone to finalize.</div>
+          <div class="bubble bubble--user">Alex Chen, (555) 987-1212.</div>
+          <div class="confirm">Appointment booked ✔︎</div>
+        </div>
+        <!-- /chat -->
+
+      </div>
+    </div>
+
+  </div>
+</section>
 
     <!-- FOUNDERS MARQUEE -->
-   <!-- FOUNDERS MARQUEE -->
-
 <section class="marquee">
-
 <div class="container marquee__heading">
-
   <span class="marquee__label">Our founders and engineers are from:</span>
-
 </div>
 
   <div class="marquee__track">
-
     <img src="stanford.png" alt="Stanford" />
-
     <img src="vanderbilt.png" alt="Vanderbilt" />
-
     <img src="google.png" alt="Google" />
-
     <img src="amazon.png" alt="Amazon" />
-
     <!-- repeat once more for seamless looping -->
-
     <img src="stanford.png" alt="Stanford" />
-
     <img src="vanderbilt.png" alt="Vanderbilt" />
-
     <img src="google.png" alt="Google" />
-
     <img src="amazon.png" alt="Amazon" />
-
       <img src="stanford.png" alt="Stanford" />
-
     <img src="vanderbilt.png" alt="Vanderbilt" />
-
     <img src="google.png" alt="Google" />
-
     <img src="amazon.png" alt="Amazon" />
-
         <img src="stanford.png" alt="Stanford" />
-
     <img src="vanderbilt.png" alt="Vanderbilt" />
-
     <img src="google.png" alt="Google" />
-
     <img src="amazon.png" alt="Amazon" />
-
             <img src="stanford.png" alt="Stanford" />
-
     <img src="vanderbilt.png" alt="Vanderbilt" />
-
     <img src="google.png" alt="Google" />
-
     <img src="amazon.png" alt="Amazon" />
-
             <img src="stanford.png" alt="Stanford" />
-
     <img src="vanderbilt.png" alt="Vanderbilt" />
-
     <img src="google.png" alt="Google" />
-
     <img src="amazon.png" alt="Amazon" />
-
   </div>
 
 </section>
 
-    <!-- CAPABILITIES -->
+    <!-- FEATURES -->
     <section id="features" class="section">
       <div class="container">
-        <h2>What Mozbe AI automates</h2>
+
+        <h2>What Mozbe AI does</h2>
+
         <div class="cards">
+
           <article class="card">
-            <h3>Bookings & Scheduling</h3>
-            <p>Answer calls/texts, check availability, reserve slots, send reminders.</p>
+            <h3>Answers calls & texts</h3>
+            <p>Always-on assistance so after-hours and overflow are covered.</p>
           </article>
+
           <article class="card">
-            <h3>Forms & Paperwork</h3>
-            <p>Collect info, generate PDFs, e-sign handoff, and file to your drive/CRM.</p>
+            <h3>Asks your intake questions</h3>
+            <p>Customized prompts mirroring your current forms and workflows.</p>
           </article>
+
           <article class="card">
-            <h3>Phone & Voice Agents</h3>
-            <p>Natural phone conversations with routing, transfers, and voicemails.</p>
+            <h3>Books consultations</h3>
+            <p>Real-time calendar sync with automatic reminders.</p>
           </article>
+
           <article class="card">
-            <h3>Integrations</h3>
-            <p>Google/Outlook/Calendly, Zapier, Airtable, HubSpot, webhooks, and APIs.</p>
+            <h3>Sends clean summaries</h3>
+            <p>Concise conversation summaries delivered to your inbox or CRM.</p>
           </article>
+
         </div>
+
       </div>
     </section>
 
     <!-- HOW IT WORKS -->
     <section id="how" class="section section--alt">
       <div class="container grid-2">
+
         <div>
           <h2>How it works</h2>
+
           <ol class="steps">
-            <li><strong>Connect your tools</strong> (calendar, CRM, forms, phone).</li>
-            <li><strong>Pick a workflow</strong> (bookings, forms, calls, docs).</li>
-            <li><strong>We tune the agent</strong> to your policies and tone.</li>
-            <li><strong>Go live in ~15 minutes</strong> and get clean logs + analytics.</li>
+            <li><strong>Connect your calendar</strong> and preferred number.</li>
+            <li><strong>Pick your script</strong> (we can clone your current form/workflow).</li>
+            <li><strong>Go live in ~15 minutes</strong> with a tracking line.</li>
+            <li><strong>Get summaries & bookings</strong> via email or CRM.</li>
           </ol>
-          <p class="note">Privacy & security: granular data retention, opt-in redaction, and BAAs on request.</p>
+
+          <p class="note">Compliance: Mozbe AI follows your policies and does not provide advice or diagnoses. It collects information and schedules appointments only.</p>
         </div>
 
         <div class="panel">
           <div class="metric">
-            <span class="metric__num" data-count="38">0</span>
-            <span class="metric__label">% more bookings</span>
+            <span class="metric__num" data-count="35">0</span>
+            <span class="metric__label">% more after-hours bookings</span>
           </div>
+
           <div class="metric">
-            <span class="metric__num" data-count="12">0</span>
-            <span class="metric__label">hrs/week saved</span>
+            <span class="metric__num" data-count="10">0</span>
+            <span class="metric__label">hrs/week staff time saved</span>
           </div>
+
           <div class="metric">
-            <span class="metric__num" data-count="2.2">0</span>
+            <span class="metric__num" data-count="2.5">0</span>
             <span class="metric__label">min to first response</span>
           </div>
         </div>
+
       </div>
     </section>
 
     <!-- RESULTS -->
     <section id="results" class="section">
       <div class="container">
+
         <h2>Teams see immediate impact</h2>
+
         <div class="quotes">
           <blockquote>
-            “We automated booking + intake across SMS and phone. No more phone tag.”
-            <cite>— K. Morales, Salon Owner</cite>
+            “We stopped missing weekend calls. Mozbe booked 11 appointments our first two weeks.”
+            <cite>— M. Alvarez, Owner</cite>
           </blockquote>
+
           <blockquote>
-            “Paperwork prep went from 20 minutes to 2. Docs appear in HubSpot automatically.”
-            <cite>— D. Patel, Clinic Ops</cite>
+            “The summaries are gold. I walk in already knowing preferences and details.”
+            <cite>— M. Patel, Operations</cite>
           </blockquote>
+
           <blockquote>
-            “Set-and-forget. It just handles after-hours and overflow.”
-            <cite>— L. Nguyen, Studio Manager</cite>
+            “Set-and-forget. Our staff time is back.”
+            <cite>— M. Nguyen, Manager</cite>
           </blockquote>
         </div>
+
       </div>
     </section>
 
-    <!-- PRICING -->
-    <section id="pricing" class="section section--alt">
-      <div class="container">
-        <h2>Simple, usage-based pricing</h2>
-        <p class="micro" style="margin-top:-0.25rem">Transparent. Month-to-month. Cancel anytime.</p>
+  <!-- PRICING -->
+<section id="pricing" class="section section--alt">
+  <div class="container">
 
-        <div class="pricing">
-          <div class="price-card">
-            <h3>Starter</h3>
-            <p class="price">Start free</p>
-            <p class="sub">14-day pilot to validate fit</p>
-            <ul>
-              <li>1 automation (e.g., bookings)</li>
-              <li>Up to 200 conversations</li>
-              <li>Calendar connections</li>
-              <li>Email/SMS notifications</li>
-            </ul>
-            <a class="btn btn--ghost" href="#book">Start pilot</a>
-          </div>
+    <h2>Flexible, business-sized pricing</h2>
+    <p class="micro" style="margin-top:-0.25rem">Transparent. Month-to-month. Cancel anytime.</p>
 
-          <div class="price-card price-card--primary" aria-label="Recommended">
-            <div class="badge">Recommended</div>
-            <h3>Growth</h3>
-            <p class="price"><span class="price__call">Let’s discuss on a quick call</span></p>
-            <p class="sub">Tailored quote by volume & channels</p>
-            <ul>
-              <li>Unlimited workflows</li>
-              <li>SMS + phone agents</li>
-              <li>CRM + webhook sync</li>
-              <li>Priority support</li>
-            </ul>
-            <a class="btn btn--primary" href="#book">Book a demo</a>
-          </div>
+    <div class="pricing">
 
-          <div class="price-card">
-            <h3>Enterprise</h3>
-            <p class="price">Custom plan</p>
-            <p class="sub">Scale, controls & compliance</p>
-            <ul>
-              <li>Multiple locations / brands</li>
-              <li>SLA & BAAs</li>
-              <li>Custom scripting</li>
-              <li>Dedicated success manager</li>
-            </ul>
-            <a class="btn btn--ghost" href="#contact">Talk to sales</a>
-          </div>
-        </div>
-
-        <div class="micro" style="margin-top:1rem">
-          Pricing reflects expected conversation volume, channels (SMS/phone), and integrations. We’ll map your workflow on a brief call and share a tailored quote.
-        </div>
+      <!-- Pilot -->
+      <div class="price-card">
+        <h3>Pilot</h3>
+        <p class="price">Start free</p>
+        <p class="sub">14-day pilot to validate fit</p>
+        <ul>
+          <li>1 tracking line</li>
+          <li>Up to 200 conversations</li>
+          <li>Calendar booking</li>
+          <li>Email summaries</li>
+        </ul>
+        <a class="btn btn--ghost" href="#book">Start pilot</a>
       </div>
-    </section>
+
+      <!-- Recommended -->
+      <div class="price-card price-card--primary" aria-label="Recommended">
+        <div class="badge">Recommended</div>
+        <h3>Professional</h3>
+        <p class="price">
+          <span class="sr-only">Pricing:</span>
+          <span class="price__call">Let’s discuss on a quick call</span>
+        </p>
+        <p class="sub">Tailored quote based on volume & channels</p>
+        <ul>
+          <li>Unlimited conversations</li>
+          <li>SMS + phone automations</li>
+          <li>Calendar & CRM sync</li>
+          <li>Priority support</li>
+        </ul>
+        <a class="btn btn--primary" href="#book">Book a demo</a>
+      </div>
+
+      <!-- Multi-office / Enterprise -->
+      <div class="price-card">
+        <h3>Multi-location</h3>
+        <p class="price">Custom plan</p>
+        <p class="sub">Scale & compliance options</p>
+        <ul>
+          <li>Multiple locations</li>
+          <li>SLA & BAAs</li>
+          <li>Custom scripting</li>
+          <li>Dedicated success manager</li>
+        </ul>
+        <a class="btn btn--ghost" href="#contact">Talk to sales</a>
+      </div>
+
+    </div>
+
+    <div class="micro" style="margin-top:1rem">
+      Pricing reflects expected conversation volume, channels (SMS/phone), and integrations. We’ll map
+      your workflow on a brief call and share a tailored quote.
+    </div>
+
+  </div>
+</section>
 
     <!-- BOOK A DEMO -->
     <section id="book" class="section">
       <div class="container grid-2">
+
         <div>
           <h2>Book a 30-minute demo</h2>
-          <p>See how Mozbe AI automates bookings, forms, phone calls, and paperwork for your team.</p>
+          <p>See how Mozbe AI captures more qualified leads for your business. Bring your script—we’ll customize on the call.</p>
+
           <ul class="checks">
             <li>Free 14-day trial</li>
             <li>No credit card</li>
             <li>Cancel anytime</li>
           </ul>
 
-          <a class="btn btn--primary btn--large" href="https://calendly.com/benjamin-j-shin-vanderbilt/30min" target="_blank" rel="noopener">
-            Open Calendly
-          </a>
+<a class="btn btn--primary btn--large" href="https://calendly.com/benjamin-j-shin-vanderbilt/30min" target="_blank" rel="noopener">
+  Open Calendly
+</a>
+
           <p class="micro">Prefer email? <a href="#contact">Contact us</a>.</p>
         </div>
 
-        <form id="contact" class="form" action="https://formspree.io/f/mldwzbra" method="POST" novalidate>
+<form id="contact" class="form" action="https://formspree.io/f/mldwzbra" method="POST" novalidate>
           <h3>Get in touch</h3>
+
           <label>Full name
             <input name="name" type="text" autocomplete="name" required />
           </label>
+
           <label>Work email
             <input name="email" type="email" autocomplete="email" required />
           </label>
-          <label>Company
+
+          <label>Company name
             <input name="firm" type="text" autocomplete="organization" />
           </label>
+
           <label>Phone (optional)
             <input name="phone" type="tel" autocomplete="tel" />
           </label>
+
           <label>Message
-            <textarea name="message" rows="4" placeholder="Tell us which workflow you want to automate"></textarea>
+            <textarea name="message" rows="4" placeholder="Tell us about the workflow you want to automate"></textarea>
           </label>
+
           <button class="btn btn--primary" type="submit">Send</button>
           <p class="form__status" role="status" aria-live="polite"></p>
           <p class="micro">By submitting, you agree to our <a href="#" aria-disabled="true">Terms</a> and acknowledge our <a href="#" aria-disabled="true">Privacy Policy</a>.</p>
         </form>
+
       </div>
     </section>
 
     <!-- FAQ -->
     <section id="faq" class="section section--alt">
       <div class="container">
+
         <h2>Common questions</h2>
 
         <details>
-          <summary>Where can Mozbe AI be used?</summary>
-          <p>Anywhere routine conversations or paperwork happen—salons, clinics, studios, home services, education, and more.</p>
+          <summary>Does this give advice or make decisions?</summary>
+          <p>No. Mozbe AI follows your policies, gathers information, schedules appointments, and routes messages. It does not provide advice or diagnoses.</p>
         </details>
 
         <details>
-          <summary>Do the agents sound natural on calls?</summary>
-          <p>Yes—agents handle greetings, clarifications, transfers, voicemails, and follow-ups with clear transcripts.</p>
+          <summary>Will this replace our staff?</summary>
+          <p>It’s designed to support your team by handling after-hours and overflow, so your staff can focus on high-value work.</p>
         </details>
 
         <details>
-          <summary>What about privacy and compliance?</summary>
-          <p>We offer data retention controls, field-level redaction, audit logs, and optional BAAs for handling PHI-adjacent data.</p>
+          <summary>What about confidentiality and compliance?</summary>
+          <p>We use confidentiality-first workflows and can sign BAAs on request for handling sensitive information.</p>
         </details>
 
         <details>
           <summary>Which calendars and CRMs do you support?</summary>
-          <p>Google Calendar, Outlook, Calendly, and common CRMs (HubSpot/Airtable via Zapier or API). Webhooks available.</p>
+          <p>Google Calendar, Outlook, Calendly, and common CRMs via email, Zapier, or API integration.</p>
         </details>
+
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
@@ -360,16 +389,19 @@
         <img src="logo.png" alt="" width="20" height="20" />
         <span>Mozbe<span class="accent">AI</span></span>
       </div>
+
       <nav class="footer__nav">
-        <a href="#features">Capabilities</a>
+        <a href="#features">Features</a>
         <a href="#pricing">Pricing</a>
         <a href="#book">Book</a>
         <a href="#faq">FAQ</a>
       </nav>
+
       <p class="micro">© <span id="year"></span> Mozbe AI. All rights reserved.</p>
     </div>
   </footer>
 
   <script src="script.js" defer></script>
+
 </body>
 </html>
